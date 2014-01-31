@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'craps_shooter'
+
+
+score = {}
+score['win'] = 0
+score['lost'] = 0
+
+1000.times do
+
+	craps = CrapsShooter::Game.new
+
+	while craps.funds < 400 && craps.funds > 0 do 
+		craps.play
+	end
+
+	puts "Rounds played #{craps.rounds.count}"
+	puts "Final balance $#{craps.funds}"
+	puts "Highest balance #{craps.higest_balance}"
+
+	if craps.funds >= 400
+		score['win'] += 1
+	else
+		score['lost'] += 1
+	end
+end
+
+puts score
+puts score['win'].to_f / score['lost'].to_f
+
+
